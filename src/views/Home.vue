@@ -1,16 +1,17 @@
 <template>
-  <hello-world />
+  <Dashboard />
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'
-  import HelloWorld from '../components/HelloWorld.vue'
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import Dashboard from "../components/Dashboard.vue";
+@Component({
+  components:{
+    Dashboard,
+  }
+})
+export default class App extends Vue {
 
-  export default Vue.extend({
-    name: 'Home',
-
-    components: {
-      HelloWorld,
-    },
-  })
+}
 </script>
