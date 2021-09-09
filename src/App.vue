@@ -9,7 +9,7 @@
         <span>Dashboard</span>
       </v-app-bar-title>
       <v-navigation-drawer v-model="drawer" absolute bottom temporary>
-        <v-list nav dense>
+        <v-list dense>
           <v-list-item-group
             active-class="deep-purple--text text--accent-4"
             v-for="navItem in navItems"
