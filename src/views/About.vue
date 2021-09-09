@@ -1,5 +1,14 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+<login/>
   </div>
 </template>
+<script lang="ts">
+import Vue from 'vue'
+import login from '../components/Login.vue'
+export default Vue.extend({
+components:{
+login
+}
+})
+</script>
