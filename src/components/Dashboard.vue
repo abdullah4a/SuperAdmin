@@ -7,7 +7,7 @@
       <v-card-content>
         <v-data-table
           :headers="headers"
-          :items="desserts"
+          :items="Items"
           :items-per-page="2"
           item-key="name"
           class="elevation-3"
@@ -39,20 +39,24 @@ export default class Dashboard extends Vue {
     { text: "In Stock", value: "Availability" },
     { text: "Remarks", value: "remarks" },
   ];
-  private desserts = [
+  private Items = [
     {
-      name: "Frozen Yogurt",
+      name: "Apples",
       price: "100",
-      Availability:"Available"
+      Availability: "Available",
+      remarks: "",
     },
     {
-      name: "Ice cream sandwich",
+      name: "Ice cream Feast",
       price: "98.44",
-      Availability:"Not Avail"
+      Availability: "Not Available",
+      remarks: "",
     },
     {
-      name: "Eclair",
+      name: "Candy",
       price: "5",
+      Availability: "Available",
+      remarks: "",
     },
   ];
 }
