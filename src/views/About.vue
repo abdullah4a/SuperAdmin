@@ -1,7 +1,9 @@
 <template>
   <div class="about">
     <v-card>
-      <h1 class="text-h4">About Us</h1>
+      <v-card-title>
+        About Us
+      </v-card-title>
     </v-card>
     <login />
   </div>

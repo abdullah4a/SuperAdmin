@@ -1,30 +1,31 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-app-bar-title>
-        <v-icon>
-          mdi-dashboard
-        </v-icon>
-        <span>Dashboard</span>
-      </v-app-bar-title>
-      <v-navigation-drawer v-model="drawer" absolute bottom temporary>
-        <v-list dense>
-          <v-list-item-group
-            active-class="deep-purple--text text--accent-4"
-            v-for="navItem in navItems"
-            :key="navItem.id"
-          >
-            <v-list-item class="text-h1">
-              <v-icon>mdi-{{ navItem.icon }}</v-icon>
-              <v-list-item-title class="pl-4">{{
-                navItem.text
-              }}</v-list-item-title>
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
-      </v-navigation-drawer>
-    </v-app-bar>
+    <v-container>
+      <v-app-bar app color="indigo" dark>
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-title>
+          <v-icon>
+            mdi-dashboard
+          </v-icon>
+          <span>Dashboard</span>
+        </v-app-bar-title>
+      </v-app-bar>
+    </v-container>
+    <v-navigation-drawer v-model="drawer" class="indigo" dark app>
+      <v-list nav dense>
+        <v-list-item
+          v-for="navItem in navItems"
+          :key="navItem.text"
+          router
+          :to="navItem.route"
+        >
+          <v-icon>mdi-{{ navItem.icon }}</v-icon>
+          <v-list-item-title class="pl-4 text-h6">{{
+            navItem.text
+          }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-main>
       <router-view />
