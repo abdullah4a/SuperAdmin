@@ -4,21 +4,23 @@
       <v-card-title>
         {{ ClassName }}
       </v-card-title>
-      <v-card-content>
-        <v-data-table
-          :headers="headers"
-          :items="Items"
-          :items-per-page="2"
-          item-key="name"
-          class="elevation-3"
-          :footer-props="{
-            showFirstLastPage: true,
-            prevIcon: 'mdi-minus',
-            nextIcon: 'mdi-plus',
-          }"
-        >
-        </v-data-table>
-      </v-card-content>
+      <v-data-table
+        :headers="headers"
+        :items="Items"
+        :items-per-page="2"
+        item-key="name"
+        sort-by="name"
+        multi-sort
+        group-by="price"
+        class="elevation-3"
+        :footer-props="{
+          showFirstLastPage: true,
+          prevIcon: 'mdi-minus',
+          nextIcon: 'mdi-plus',
+        }"
+        show-group-by
+      >
+      </v-data-table>
     </v-card>
   </v-app>
 </template>
@@ -28,10 +30,11 @@ import Vue from "vue";
 import Component from "vue-class-component";
 @Component({})
 export default class Dashboard extends Vue {
+  serch = "";
   private ClassName = "DashBoard";
   private headers = [
     {
-      text: "Item (1Kg serving)",
+      text: "Item",
       align: "start",
       value: "name",
     },
