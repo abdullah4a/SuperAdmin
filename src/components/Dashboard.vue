@@ -4,23 +4,36 @@
       <v-card-title>
         {{ ClassName }}
       </v-card-title>
-      <v-data-table
-        :headers="headers"
-        :items="Items"
-        :items-per-page="2"
-        item-key="name"
-        sort-by="name"
-        multi-sort
-        group-by="price"
-        class="elevation-3"
-        :footer-props="{
-          showFirstLastPage: true,
-          prevIcon: 'mdi-minus',
-          nextIcon: 'mdi-plus',
-        }"
-        show-group-by
-      >
-      </v-data-table>
+      <v-row>
+        <v-col md="4">
+          <v-text-field
+            v-model="serch"
+            append-icon="mdi-magnify"
+            label="Search"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col text-center>
+          <v-data-table
+            :headers="headers"
+            :items="Items"
+            :items-per-page="2"
+            item-key="name"
+            :search="serch"
+            sort-by="name"
+            multi-sort
+            group-by="price"
+            class="elevation-3"
+            :footer-props="{
+              showFirstLastPage: true,
+              prevIcon: 'mdi-minus',
+              nextIcon: 'mdi-plus',
+            }"
+          >
+          </v-data-table>
+        </v-col>
+      </v-row>
     </v-card>
   </v-app>
 </template>
