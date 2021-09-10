@@ -29,6 +29,21 @@
                 <v-icon>mdi-file-plus</v-icon>
                 <span>Add Item</span>
               </v-card-title>
+              <v-card-text>
+                <v-text-field label="Item Name"></v-text-field>
+                <v-text-field label="Item Price"></v-text-field>
+                <v-text-field label="Item Availability"></v-text-field>
+                <v-text-field label="Remarks"></v-text-field>
+              </v-card-text>
+              <v-divider></v-divider>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn rounded dark>
+                  <v-icon>mdi-plus</v-icon>
+                  <span>add</span>
+                </v-btn>
+                <v-spacer></v-spacer>
+              </v-card-actions>
             </v-card>
           </v-dialog>
         </v-col>
@@ -65,6 +80,7 @@ import Component from "vue-class-component";
 @Component({})
 export default class Dashboard extends Vue {
   serch = "";
+  private dialog = false;
   private ClassName = "DashBoard";
   private headers = [
     {
@@ -96,5 +112,10 @@ export default class Dashboard extends Vue {
       remarks: "",
     },
   ];
+  closeDialog() {
+    if (this.dialog) {
+      this.dialog = false;
+    }
+  }
 }
 </script>
