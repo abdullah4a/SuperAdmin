@@ -2,7 +2,11 @@
   <v-app>
     <v-container>
       <v-app-bar app color="indigo" dark>
-        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <!-- <v-app-bar-nav-icon @click="drawer = !drawer"> </v-app-bar-nav-icon> -->
+        <v-btn fab dark @click="drawer = !drawer" class="mr-2" text>
+          <v-icon v-if="!drawer">mdi-format-list-bulleted-square</v-icon>
+          <v-icon v-else>mdi-close</v-icon>
+        </v-btn>
         <v-app-bar-title>
           <v-icon>
             mdi-dashboard

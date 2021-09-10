@@ -5,15 +5,36 @@
         {{ ClassName }}
       </v-card-title>
       <v-row>
+        <!-- Search Box -->
         <v-col md="4">
           <v-text-field
             v-model="serch"
             append-icon="mdi-magnify"
             label="Search"
-          ></v-text-field>
+            single-line
+          >
+          </v-text-field>
+        </v-col>
+        <!-- Button for dialog to Enter  Items -->
+        <v-col md="2">
+          <v-dialog v-model="dialog" max-width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="green--text" text v-on="on" v-bind="attrs" rounded>
+                <v-icon>mdi-plus</v-icon>
+                <span>Add Items</span>
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-title>
+                <v-icon>mdi-file-plus</v-icon>
+                <span>Add Item</span>
+              </v-card-title>
+            </v-card>
+          </v-dialog>
         </v-col>
       </v-row>
       <v-row>
+        <!-- DataTable -->
         <v-col text-center>
           <v-data-table
             :headers="headers"
