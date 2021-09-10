@@ -19,10 +19,28 @@
         <v-col md="2">
           <v-dialog v-model="dialog" max-width="500">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn class="green--text" text v-on="on" v-bind="attrs" rounded>
+              <v-btn
+                class="green--text"
+                text
+                v-on="on"
+                v-bind="attrs"
+                rounded
+                @click="dialog = true"
+              >
                 <v-icon>mdi-plus</v-icon>
                 <span>Add Items</span>
               </v-btn>
+              <!-- chip will rendered when items pushed into list -->
+              <v-chip
+                v-if="chip"
+                class="ma-2"
+                close
+                color="green"
+                outlined
+                @click:close="chip = false"
+              >
+                Success
+              </v-chip>
             </template>
             <v-card>
               <v-card-title>
@@ -38,7 +56,7 @@
               <v-divider></v-divider>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn rounded dark>
+                <v-btn rounded dark @click="closeDialog">
                   <v-icon>mdi-plus</v-icon>
                   <span>add</span>
                 </v-btn>
@@ -81,6 +99,7 @@ import Component from "vue-class-component";
 export default class Dashboard extends Vue {
   serch = "";
   private dialog = false;
+  private chip = false;
   private ClassName = "DashBoard";
   private headers = [
     {
@@ -113,8 +132,9 @@ export default class Dashboard extends Vue {
     },
   ];
   closeDialog() {
-    if (this.dialog) {
+    if (this.dialog && !this.chip) {
       this.dialog = false;
+      this.chip = true;
     }
   }
 }
