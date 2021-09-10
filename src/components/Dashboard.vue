@@ -137,5 +137,8 @@ export default class Dashboard extends Vue {
       this.chip = true;
     }
   }
+  // deleteItem(id) {
+  // const index = this.Items.indexOf((x: boolean) => x.id === id);
+  // }
 }
 </script>
