@@ -89,7 +89,7 @@
             }"
           >
             <template v-slot:item.remarks="{ item }">
-              <v-icon small @click="deleteItem(item.id)">mdi-delete</v-icon>
+              <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
             </template>
           </v-data-table>
         </v-col>
@@ -101,7 +101,6 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import CrudDataTables from "./Crud DataTables.vue";
 @Component({})
 export default class Dashboard extends Vue {
   serch = "";
@@ -144,7 +143,8 @@ export default class Dashboard extends Vue {
     }
   }
   deleteItem(id: any) {
-    const index = this.Items.indexOf((x) => x.id === id);
+    console.log(id);
+    const index = this.Items.indexOf(id);
     if (index > -1) {
       this.Items.splice(index, 1);
     }
