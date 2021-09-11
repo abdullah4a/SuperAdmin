@@ -58,6 +58,10 @@
                 <v-spacer></v-spacer>
                 <v-btn rounded dark @click="closeDialog">
                   <v-icon>mdi-plus</v-icon>
+                  <span>cancel</span>
+                </v-btn>
+                <v-btn rounded dark @click="closeDialog">
+                  <v-icon>mdi-plus</v-icon>
                   <span>add</span>
                 </v-btn>
                 <v-spacer></v-spacer>
@@ -77,7 +81,6 @@
             :search="serch"
             sort-by="name"
             multi-sort
-            group-by="price"
             class="elevation-3"
             :footer-props="{
               showFirstLastPage: true,
@@ -85,6 +88,9 @@
               nextIcon: 'mdi-plus',
             }"
           >
+            <template v-slot:item.remarks="{ item }">
+              <v-icon small @click="deleteItem(item.id)">mdi-delete</v-icon>
+            </template>
           </v-data-table>
         </v-col>
       </v-row>
@@ -95,6 +101,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import CrudDataTables from "./Crud DataTables.vue";
 @Component({})
 export default class Dashboard extends Vue {
   serch = "";
@@ -102,43 +109,45 @@ export default class Dashboard extends Vue {
   private chip = false;
   private ClassName = "DashBoard";
   private headers = [
-    {
-      text: "Item",
-      align: "start",
-      value: "name",
-    },
+    { text: "Item Id", align: "start", value: "id" },
+    { text: "Item", value: "name" },
     { text: "Price", value: "price" },
-    { text: "In Stock", value: "Availability" },
+    { text: "Availability", value: "InStock" },
     { text: "Remarks", value: "remarks" },
   ];
   private Items = [
     {
+      id: 1000,
       name: "Apples",
       price: "100",
-      Availability: "Available",
+      InStock: "In Stock",
       remarks: "",
     },
     {
+      id: 1001,
       name: "Ice cream Feast",
       price: "98.44",
-      Availability: "Not Available",
+      InStock: "Not In Stock",
       remarks: "",
     },
     {
+      id: 1002,
       name: "Candy",
       price: "5",
-      Availability: "Available",
+      InStock: "In Stock",
       remarks: "",
     },
   ];
   closeDialog() {
-    if (this.dialog && !this.chip) {
+    if (this.dialog) {
       this.dialog = false;
-      this.chip = true;
     }
   }
-  // deleteItem(id) {
-  // const index = this.Items.indexOf((x: boolean) => x.id === id);
-  // }
+  deleteItem(id: any) {
+    const index = this.Items.indexOf((x) => x.id === id);
+    if (index > -1) {
+      this.Items.splice(index, 1);
+    }
+  }
 }
 </script>
