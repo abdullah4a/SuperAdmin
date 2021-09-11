@@ -46,6 +46,10 @@
               <v-card-title>
                 <v-icon>mdi-file-plus</v-icon>
                 <span>Add Item</span>
+                <v-spacer></v-spacer>
+                <v-icon></v-icon>
+                <v-icon @click="maximize">mdi-window-maximize</v-icon>
+                <v-icon @click="closeDialog">mdi-window-close</v-icon>
               </v-card-title>
               <v-card-text>
                 <v-text-field label="Item Name"></v-text-field>
@@ -57,10 +61,10 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn rounded dark @click="closeDialog">
-                  <v-icon>mdi-plus</v-icon>
+                  <v-icon>mdi-cancel</v-icon>
                   <span>cancel</span>
                 </v-btn>
-                <v-btn rounded dark @click="closeDialog">
+                <v-btn rounded dark @click="AddItem(item)">
                   <v-icon>mdi-plus</v-icon>
                   <span>add</span>
                 </v-btn>
@@ -106,6 +110,7 @@ export default class Dashboard extends Vue {
   serch = "";
   private dialog = false;
   private chip = false;
+  private maxi = false;
   private ClassName = "DashBoard";
   private headers = [
     { text: "Item Id", align: "start", value: "id" },
@@ -138,9 +143,7 @@ export default class Dashboard extends Vue {
     },
   ];
   closeDialog() {
-    if (this.dialog) {
-      this.dialog = false;
-    }
+    this.dialog = false;
   }
   deleteItem(id: any) {
     console.log(id);
@@ -148,6 +151,9 @@ export default class Dashboard extends Vue {
     if (index > -1) {
       this.Items.splice(index, 1);
     }
+  }
+  AddItem(item: any) {
+    console.log(`Values are :${item}`);
   }
 }
 </script>
