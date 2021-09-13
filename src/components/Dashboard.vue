@@ -172,11 +172,14 @@ export default class Dashboard extends Vue {
     console.log("Maximizing the window ");
   }
   GetMaxID() {
-    return this.Items.reduce(
-      (acc, item) => (acc = acc > item.id ? acc : item.id),
-      0
-    );
+    // return this.Items.reduce(
+    //   (acc, item) => (acc = acc > item.id ? acc : item.id),
+    //   0
+    // );
+    return Math.max(...this.Items.map((s) => s.id));
   }
-  AddItem() {}
+  AddItem() {
+    this.Items.concat(this.NewItem);
+  }
 }
 </script>
