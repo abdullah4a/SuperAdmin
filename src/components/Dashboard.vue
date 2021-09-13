@@ -17,7 +17,7 @@
         </v-col>
         <!-- Button for dialog to Enter  Items -->
         <v-col md="2">
-          <v-dialog v-model="dialog" max-width="500">
+          <v-dialog v-model="dialog" width="500" :fullscreen="maxi">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 class="green--text"
@@ -48,7 +48,10 @@
                 <span>Add Item</span>
                 <v-spacer></v-spacer>
                 <v-icon></v-icon>
-                <v-icon @click="maximize">mdi-window-maximize</v-icon>
+                <v-icon @click="maximize" v-if="!maxi">
+                  mdi-window-maximize
+                </v-icon>
+                <v-icon v-else @click="maximize">mdi-window-restore</v-icon>
                 <v-icon @click="closeDialog">mdi-window-close</v-icon>
               </v-card-title>
               <v-card-text>
@@ -93,7 +96,7 @@
             item-key="name"
             :search="serch"
             multi-sort
-            class="elevation-3"
+            class="elevation-6"
             :footer-props="{
               showFirstLastPage: true,
               prevIcon: 'mdi-minus',
@@ -115,6 +118,7 @@
 <script lang="ts">
 import Vue from "vue";
 import message from "./Message.vue";
+import { Items } from "../Shared";
 import Component from "vue-class-component";
 @Component({
   components: {
@@ -126,6 +130,7 @@ export default class Dashboard extends Vue {
   private dialog = false;
   private chip = false;
   private maxi = false;
+  private Items = {};
   private ClassName = "DashBoard";
   private headers = [
     { text: "Item Id", value: "id" },
@@ -134,56 +139,55 @@ export default class Dashboard extends Vue {
     { text: "Availability", value: "InStock" },
     { text: "Remarks", value: "remarks" },
   ];
-  private Items = [
-    {
-      id: 1000,
-      name: "Apples",
-      price: "100",
-      InStock: "In Stock",
-      remarks: "",
-    },
-    {
-      id: 1001,
-      name: "Ice cream Feast",
-      price: "98.44",
-      InStock: "Not In Stock",
-      remarks: "",
-    },
-    {
-      id: 1002,
-      name: "Candy",
-      price: "5",
-      InStock: "In Stock",
-      remarks: "",
-    },
-  ];
-  private NewItem = this.GetMaxID();
+  // private Items = [
+  //   {
+  //     id: 1000,
+  //     name: "Apples",
+  //     price: "100",
+  //     InStock: "In Stock",
+  //     remarks: "",
+  //   },
+  //   {
+  //     id: 1001,
+  //     name: "Ice cream Feast",
+  //     price: "98.44",
+  //     InStock: "Not In Stock",
+  //     remarks: "",
+  //   },
+  //   {
+  //     id: 1002,
+  //     name: "Candy",
+  //     price: "5",
+  //     InStock: "In Stock",
+  //     remarks: "",
+  //   },
+  // ];
+  private NewItem = {
+    id: Items.GetMaxID(),
+    name: "",
+    price: "",
+    InStock: "",
+    remarks: "",
+  };
   closeDialog() {
     this.dialog = false;
   }
-  deleteItem(id: any) {
-    console.log(id);
-    const index = this.Items.indexOf(id);
-    if (index > -1) {
-      this.Items.splice(index, 1);
-    }
+
+  created() {
+    this.LoadItems;
   }
   maximize() {
-    console.log("Maximizing the window ");
+    if (!this.maxi) {
+      this.maxi = true;
+    } else {
+      this.maxi = false;
+    }
   }
-  GetMaxID() {
-    // return this.Items.reduce(
-    //   (acc, item) => (acc = acc > item.id ? acc : item.id),
-    //   0
-    // );
-    // return Math.max(...this.Items.map((s) => s.id));
-    let nItem = this.Items.filter(function(item) {
-      return item;
-    });
-    return nItem;
-  }
-  AddItem() {
-    // this.Items.concat(this.NewItem);
+
+  AddItem(item:any) {Items.AddItems(item)}
+
+  LoadItems() {
+    this.Items = Items.getItems;
   }
 }
 </script>

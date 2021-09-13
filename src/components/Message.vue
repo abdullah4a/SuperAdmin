@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="text center">
     <v-card>
       <v-card-title>
         <v-icon>
@@ -10,8 +10,8 @@
       <v-card-text v-for="data in Data" :key="data.title">
         <v-layout row wrap>
           <v-flex xs12 md6>
-            <div class="caption gray--text">{{ data.title }}</div>
-            <div>{{ data.message }}</div>
+            <div class="text h4">{{ data.title }}</div>
+            <div class="caption gray--text">{{ data.message }}</div>
           </v-flex>
         </v-layout>
       </v-card-text>

@@ -1,0 +1,22 @@
+ [{
+         "id": 1000,
+         "name": "Apples",
+         "price": "100",
+         "InStock": "In Stock",
+         "remarks": ""
+     },
+     {
+         "id": 1001,
+         "name": "Ice cream Feast",
+         "price": "98.44",
+         "InStock": "Not In Stock",
+         "remarks": ""
+     },
+     {
+         "id": 1002,
+         "name": "Candy",
+         "price": "5",
+         "InStock": "In Stock",
+         "remarks": ""
+     }
+ ]
