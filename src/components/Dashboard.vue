@@ -151,7 +151,13 @@ export default class Dashboard extends Vue {
       remarks: "",
     },
   ];
-  private NewItem = { id: 0, name: "", price: "", InStock: "", remarks: "" };
+  private NewItem = {
+    id: this.GetMaxID(),
+    name: "",
+    price: "",
+    InStock: "",
+    remarks: "",
+  };
   closeDialog() {
     this.dialog = false;
   }
