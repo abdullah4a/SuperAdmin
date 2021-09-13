@@ -52,10 +52,19 @@
                 <v-icon @click="closeDialog">mdi-window-close</v-icon>
               </v-card-title>
               <v-card-text>
-                <v-text-field label="Item Name"></v-text-field>
-                <v-text-field label="Item Price"></v-text-field>
-                <v-text-field label="Item Availability"></v-text-field>
-                <v-text-field label="Remarks"></v-text-field>
+                <v-text-field label="ID" v-model="NewItem.id" readonly>
+                </v-text-field>
+                <v-text-field label="Item Name" v-model="NewItem.name">
+                </v-text-field>
+                <v-text-field label="Item Price" v-model="NewItem.price">
+                </v-text-field>
+                <v-text-field
+                  label="Item Availability"
+                  v-model="NewItem.InStock"
+                >
+                </v-text-field>
+                <v-text-field label="Remarks" v-model="NewItem.remarks">
+                </v-text-field>
               </v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
@@ -64,9 +73,9 @@
                   <v-icon>mdi-cancel</v-icon>
                   <span>cancel</span>
                 </v-btn>
-                <v-btn rounded dark @click="AddItem(item)">
+                <v-btn rounded dark @click="AddItem">
                   <v-icon>mdi-plus</v-icon>
-                  <span>add</span>
+                  <span>save</span>
                 </v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
@@ -142,6 +151,7 @@ export default class Dashboard extends Vue {
       remarks: "",
     },
   ];
+  private NewItem = { id: 0, name: "", price: "", InStock: "", remarks: "" };
   closeDialog() {
     this.dialog = false;
   }
@@ -152,8 +162,15 @@ export default class Dashboard extends Vue {
       this.Items.splice(index, 1);
     }
   }
-  AddItem(item: any) {
-    console.log(`Values are :${item}`);
+  maximize() {
+    console.log("Maximizing the window ");
   }
+  GetMaxID() {
+    return this.Items.reduce(
+      (acc, item) => (acc = acc > item.id ? acc : item.id),
+      0
+    );
+  }
+  AddItem() {}
 }
 </script>
