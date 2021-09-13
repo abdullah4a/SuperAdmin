@@ -92,7 +92,6 @@
             :items-per-page="2"
             item-key="name"
             :search="serch"
-            sort-by="name"
             multi-sort
             class="elevation-3"
             :footer-props="{
@@ -101,6 +100,7 @@
               nextIcon: 'mdi-plus',
             }"
           >
+            <!-- sort-by="name" -->
             <template v-slot:item.remarks="{ item }">
               <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
             </template>
@@ -108,13 +108,19 @@
         </v-col>
       </v-row>
     </v-card>
+    <message />
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import message from "./Message.vue";
 import Component from "vue-class-component";
-@Component({})
+@Component({
+  components: {
+    message,
+  },
+})
 export default class Dashboard extends Vue {
   serch = "";
   private dialog = false;
@@ -122,7 +128,7 @@ export default class Dashboard extends Vue {
   private maxi = false;
   private ClassName = "DashBoard";
   private headers = [
-    { text: "Item Id", align: "start", value: "id" },
+    { text: "Item Id", value: "id" },
     { text: "Item", value: "name" },
     { text: "Price", value: "price" },
     { text: "Availability", value: "InStock" },
@@ -151,13 +157,7 @@ export default class Dashboard extends Vue {
       remarks: "",
     },
   ];
-  private NewItem = {
-    id: this.GetMaxID(),
-    name: "",
-    price: "",
-    InStock: "",
-    remarks: "",
-  };
+  private NewItem = this.GetMaxID();
   closeDialog() {
     this.dialog = false;
   }
@@ -176,10 +176,14 @@ export default class Dashboard extends Vue {
     //   (acc, item) => (acc = acc > item.id ? acc : item.id),
     //   0
     // );
-    return Math.max(...this.Items.map((s) => s.id));
+    // return Math.max(...this.Items.map((s) => s.id));
+    let nItem = this.Items.filter(function(item) {
+      return item;
+    });
+    return nItem;
   }
   AddItem() {
-    this.Items.concat(this.NewItem);
+    // this.Items.concat(this.NewItem);
   }
 }
 </script>
