@@ -29,11 +29,10 @@ $color: #8cc271, #69beeb, #f5a39f, #e9643b;
   height: 20px;
   margin-right: 10px;
   @for $i from 1 through length($color) {
-    &:nth-child(#{i}) {
+    &:nth-child(#{n}) {
       background-color: nth($color, $i);
     }
   }
-  
 }
 @keyframes left {
   40% {

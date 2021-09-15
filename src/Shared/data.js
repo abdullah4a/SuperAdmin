@@ -2,7 +2,7 @@ import * as axios from "axios"
 import { API } from "./config"
 const getItems = async function() {
         try {
-            const responce = await axios.get(`${API}/Items.json`);
+            const responce = await axios.get(`api/Items.json`);
             let data = parselist(responce);
             return data;
         } catch (error) {

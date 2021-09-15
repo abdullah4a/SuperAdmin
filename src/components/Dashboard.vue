@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    
+    <pageloader v-if="loading" />
     <v-card>
       <v-card-title>
         {{ ClassName }}
@@ -98,9 +98,9 @@
             }"
           >
             <!-- sort-by="name" -->
-            <template #item.remarks="{ item }">
+            <!-- <template #item.remarks="{ item }">
               <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
-            </template>
+            </template> -->
           </v-data-table>
         </v-col>
       </v-row>
@@ -113,11 +113,12 @@
 import Vue from "vue";
 import message from "./Message.vue";
 import Component from "vue-class-component";
+import pageloader from "./PageLoader.vue";
 import { Items } from "../Shared";
 @Component({
   components: {
     message,
-    pageloader
+    pageloader,
   },
 })
 export default class Dashboard extends Vue {
@@ -125,7 +126,7 @@ export default class Dashboard extends Vue {
   private dialog = false;
   private chip = false;
   private maxi = false;
-  private Items: Promise<(string | number)[]> = [];
+  private Items = [];
   private ClassName = "DashBoard";
   private headers = [
     { text: "Item Id", value: "id" },
@@ -157,14 +158,14 @@ export default class Dashboard extends Vue {
   //     remarks: "",
   //   },
   // ];
-  private loading=true;
+  private loading = true;
   private NewItem = [];
   closeDialog() {
     this.dialog = false;
   }
-  beforeCreate () {
-    this.loading=true;
-  },
+  beforeCreate() {
+    this.loading = true;
+  }
   async created() {
     this.loading = false;
     await this.LoadItems();
@@ -198,8 +199,7 @@ export default class Dashboard extends Vue {
       if (Items.getItems()) {
         if ((await Items.getItems()) !== []) {
           alert("Data fetched");
-          this.Items = Items.getItems();
-          this.Items.then();
+          this.Items.push(Items.getItems());
         } else {
           alert("Null Data");
         }
