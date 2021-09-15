@@ -4,8 +4,7 @@ const getItems = async function() {
         try {
             const responce = await axios.get(`${API}/Items.json`);
             let data = parselist(responce);
-            const users = data;
-            return users;
+            return data;
         } catch (error) {
             console.error(`There is an Error ${error}`);
             return [];
@@ -43,7 +42,7 @@ const deleteItem = id => {
 };
 const AddItems = item => {
     //     this.Items.concat(this.NewItem);
-    console.log(item);
+    console.log(`Items are Added ${item}`);
 }
 export const Items = {
     getItems,

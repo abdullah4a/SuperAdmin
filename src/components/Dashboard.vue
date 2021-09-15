@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    
     <v-card>
       <v-card-title>
         {{ ClassName }}
@@ -55,19 +56,12 @@
                 <v-icon @click="closeDialog">mdi-window-close</v-icon>
               </v-card-title>
               <v-card-text>
-                <v-text-field label="ID" v-model="NewItem.id" readonly>
+                <v-text-field id="Itemid" label="ID"> </v-text-field>
+                <v-text-field id="ItemName" label="Item Name"> </v-text-field>
+                <v-text-field id="ItemPrice" label="Item Price"> </v-text-field>
+                <v-text-field id="ItemInStock" label="Item Availability">
                 </v-text-field>
-                <v-text-field label="Item Name" v-model="NewItem.name">
-                </v-text-field>
-                <v-text-field label="Item Price" v-model="NewItem.price">
-                </v-text-field>
-                <v-text-field
-                  label="Item Availability"
-                  v-model="NewItem.InStock"
-                >
-                </v-text-field>
-                <v-text-field label="Remarks" v-model="NewItem.remarks">
-                </v-text-field>
+                <v-text-field id="ItemRemark" label="Remarks"> </v-text-field>
               </v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
@@ -104,7 +98,7 @@
             }"
           >
             <!-- sort-by="name" -->
-            <template v-slot:item.remarks="{ item }">
+            <template #item.remarks="{ item }">
               <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
             </template>
           </v-data-table>
@@ -118,11 +112,12 @@
 <script lang="ts">
 import Vue from "vue";
 import message from "./Message.vue";
-import { Items } from "../Shared";
 import Component from "vue-class-component";
+import { Items } from "../Shared";
 @Component({
   components: {
     message,
+    pageloader
   },
 })
 export default class Dashboard extends Vue {
@@ -130,7 +125,7 @@ export default class Dashboard extends Vue {
   private dialog = false;
   private chip = false;
   private maxi = false;
-  private Items = {};
+  private Items: Promise<(string | number)[]> = [];
   private ClassName = "DashBoard";
   private headers = [
     { text: "Item Id", value: "id" },
@@ -162,19 +157,17 @@ export default class Dashboard extends Vue {
   //     remarks: "",
   //   },
   // ];
-  private NewItem = {
-    id: Items.GetMaxID(),
-    name: "",
-    price: "",
-    InStock: "",
-    remarks: "",
-  };
+  private loading=true;
+  private NewItem = [];
   closeDialog() {
     this.dialog = false;
   }
-
-  created() {
-    this.LoadItems;
+  beforeCreate () {
+    this.loading=true;
+  },
+  async created() {
+    this.loading = false;
+    await this.LoadItems();
   }
   maximize() {
     if (!this.maxi) {
@@ -184,10 +177,38 @@ export default class Dashboard extends Vue {
     }
   }
 
-  AddItem(item:any) {Items.AddItems(item)}
+  AddItem() {
+    //   // Items.AddItems(this.NewItem);
+    //   // let id = document.querySelector("input[Itemid]")?.nodeValue;
+    //   let id = document.getElementById("Itemid")!;
+    //   let Name = document.getElementById("ItemName")!;
+    //   let price = document.getElementById("ItemPrice")!;
+    //   let InStock = document.getElementById("ItemInStock")!;
+    //   let Remark = document.getElementById("ItemRemark")!;
+    //   this.NewItem.push(id.value);
+    //   this.NewItem.push(Name.value);
+    //   this.NewItem.push(price.value);
+    //   this.NewItem.push(InStock.value);
+    //   this.NewItem.push(Remark.value);
+    //   console.log(`Added Item where Items=${this.NewItem}`);
+  }
 
-  LoadItems() {
-    this.Items = Items.getItems;
+  async LoadItems() {
+    try {
+      if (Items.getItems()) {
+        if ((await Items.getItems()) !== []) {
+          alert("Data fetched");
+          this.Items = Items.getItems();
+          this.Items.then();
+        } else {
+          alert("Null Data");
+        }
+      } else {
+        alert("No Data");
+      }
+    } catch (error) {
+      alert("Error getting connection " + error);
+    }
   }
 }
 </script>
