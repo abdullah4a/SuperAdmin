@@ -12,9 +12,6 @@
           <v-text-field label="Date of Birth" type="date"></v-text-field>
           <v-text-field label="Email" type="email"></v-text-field>
           <v-text-field label="Country" type="dropdown"></v-text-field>
-          <v-text-field label="Name"></v-text-field>
-          <v-text-field label="Name"></v-text-field>
-          <v-text-field label="Name"></v-text-field>
         </v-card-text>
       </v-card>
     </v-main>

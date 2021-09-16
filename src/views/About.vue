@@ -15,5 +15,14 @@ export default Vue.extend({
   components: {
     login,
   },
+  data() {
+    return {
+      hidden: false,
+    };
+  },
+  methods: {
+    
+    // shows() {},
+  },
 });
 </script>

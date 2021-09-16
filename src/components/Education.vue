@@ -10,8 +10,6 @@
           <v-text-field label="Name"></v-text-field>
           <v-text-field label="Name"></v-text-field>
           <v-text-field label="Name"></v-text-field>
-          <v-text-field label="Name"></v-text-field>
-          <v-text-field label="Name"></v-text-field>
         </v-card-text>
       </v-card>
     </v-main>

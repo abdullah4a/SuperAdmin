@@ -6,7 +6,7 @@
     <!--  ******************* -->
     <v-main>
       <v-card>
-        <v-btn v-show="e6 == 0" @click="e6 = 1" class="success">
+        <v-btn v-show="e6 == 0 || e6 == 3" @click="e6 = 1" class="success">
           <v-icon>mdi-autorenew</v-icon>
           <v-spacer></v-spacer>
           <span>Enter Details</span>
@@ -20,8 +20,9 @@
             <v-card color="grey lighten-1" class="mb-12">
               <PersonalInfo />
             </v-card>
-            <v-btn color="primary" @click="e6 = 3">
-              Continue
+            <v-btn color="primary" @click="e6 = 2" @focus="hidden = true">
+              <v-icon>mdi-chevron-right</v-icon>
+              <span>Next</span>
             </v-btn>
             <v-btn text @click="e6 = 0">
               Cancel
@@ -37,7 +38,8 @@
               <education />
             </v-card>
             <v-btn color="primary" @click="e6 = 3">
-              Continue
+              <v-icon>mdi-content-save</v-icon>
+              <span>Save</span>
             </v-btn>
             <v-btn text @click="e6 = 1">
               Cancel
@@ -45,6 +47,20 @@
           </v-stepper-content>
         </v-stepper>
       </v-card>
+      <v-fab-transition>
+        <v-btn
+          v-show="hidden"
+          color="pink"
+          dark
+          absolute
+          bottom
+          right
+          fab
+          @click="scrolltop"
+        >
+          <v-icon>mdi-chevron-up</v-icon>
+        </v-btn>
+      </v-fab-transition>
     </v-main>
     <!--  ******************* -->
     <!--  ******************* -->
@@ -64,6 +80,10 @@ import PersonalInfo from "./PersonalInfo.vue";
   },
 })
 export default class Steppers extends Vue {
+  hidden = false;
   private e6 = 1;
+  scrollltop() {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
 }
 </script>
