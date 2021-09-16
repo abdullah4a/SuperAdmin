@@ -98,10 +98,10 @@
                 nextIcon: 'mdi-plus',
               }"
             >
-              <!-- sort-by="name" -->
-              <!-- <template #item.remarks="{ item }">
-              <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
-            </template> -->
+              sort-by="name" -->
+              <template #item.remarks="{ item }">
+                <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+              </template>
             </v-data-table>
           </v-col>
         </v-row>
