@@ -1,111 +1,113 @@
 <template>
   <v-app>
     <pageloader v-if="loading" />
-    <v-card>
-      <v-card-title>
-        {{ ClassName }}
-      </v-card-title>
-      <v-row>
-        <!-- Search Box -->
-        <v-col md="4">
-          <v-text-field
-            v-model="serch"
-            append-icon="mdi-magnify"
-            label="Search"
-            single-line
-          >
-          </v-text-field>
-        </v-col>
-        <!-- Button for dialog to Enter  Items -->
-        <v-col md="2">
-          <v-dialog v-model="dialog" width="500" :fullscreen="maxi">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                class="green--text"
-                text
-                v-on="on"
-                v-bind="attrs"
-                rounded
-                @click="dialog = true"
-              >
-                <v-icon>mdi-plus</v-icon>
-                <span>Add Items</span>
-              </v-btn>
-              <!-- chip will rendered when items pushed into list -->
-              <v-chip
-                v-if="chip"
-                class="ma-2"
-                close
-                color="green"
-                outlined
-                @click:close="chip = false"
-              >
-                Success
-              </v-chip>
-            </template>
-            <v-card>
-              <v-card-title>
-                <v-icon>mdi-file-plus</v-icon>
-                <span>Add Item</span>
-                <v-spacer></v-spacer>
-                <v-icon></v-icon>
-                <v-icon @click="maximize" v-if="!maxi">
-                  mdi-window-maximize
-                </v-icon>
-                <v-icon v-else @click="maximize">mdi-window-restore</v-icon>
-                <v-icon @click="closeDialog">mdi-window-close</v-icon>
-              </v-card-title>
-              <v-card-text>
-                <v-text-field id="Itemid" label="ID"> </v-text-field>
-                <v-text-field id="ItemName" label="Item Name"> </v-text-field>
-                <v-text-field id="ItemPrice" label="Item Price"> </v-text-field>
-                <v-text-field id="ItemInStock" label="Item Availability">
-                </v-text-field>
-                <v-text-field id="ItemRemark" label="Remarks"> </v-text-field>
-              </v-card-text>
-              <v-divider></v-divider>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn rounded dark @click="closeDialog">
-                  <v-icon>mdi-cancel</v-icon>
-                  <span>cancel</span>
-                </v-btn>
-                <v-btn rounded dark @click="AddItem">
+    <v-main class="ml-7">
+      <v-card>
+        <v-card-title>
+          {{ ClassName }}
+        </v-card-title>
+        <v-row>
+          <!-- Search Box -->
+          <v-col md="4">
+            <v-text-field
+              v-model="serch"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+            >
+            </v-text-field>
+          </v-col>
+          <!-- Button for dialog to Enter  Items -->
+          <v-col md="2">
+            <v-dialog v-model="dialog" width="500" :fullscreen="maxi">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  class="green--text"
+                  text
+                  v-on="on"
+                  v-bind="attrs"
+                  rounded
+                  @click="dialog = true"
+                >
                   <v-icon>mdi-plus</v-icon>
-                  <span>save</span>
+                  <span>Add Items</span>
                 </v-btn>
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-col>
-      </v-row>
-      <v-row>
-        <!-- DataTable -->
-        <v-col text-center>
-          <v-data-table
-            :headers="headers"
-            :items="Items"
-            :items-per-page="2"
-            item-key="name"
-            :search="serch"
-            multi-sort
-            class="elevation-6"
-            :footer-props="{
-              showFirstLastPage: true,
-              prevIcon: 'mdi-minus',
-              nextIcon: 'mdi-plus',
-            }"
-          >
-            <!-- sort-by="name" -->
-            <!-- <template #item.remarks="{ item }">
+                <!-- chip will rendered when items pushed into list -->
+                <v-chip
+                  v-if="chip"
+                  class="ma-2"
+                  close
+                  color="green"
+                  outlined
+                  @click:close="chip = false"
+                >
+                  Success
+                </v-chip>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <v-icon>mdi-file-plus</v-icon>
+                  <span>Add Item</span>
+                  <v-spacer></v-spacer>
+                  <v-icon></v-icon>
+                  <v-icon @click="maximize" v-if="!maxi">
+                    mdi-window-maximize
+                  </v-icon>
+                  <v-icon v-else @click="maximize">mdi-window-restore</v-icon>
+                  <v-icon @click="closeDialog">mdi-window-close</v-icon>
+                </v-card-title>
+                <v-card-text>
+                  <v-text-field id="Itemid" label="ID"> </v-text-field>
+                  <v-text-field id="ItemName" label="Item Name"> </v-text-field>
+                  <v-text-field id="ItemPrice" label="Item Price">
+                  </v-text-field>
+                  <v-text-field id="ItemInStock" label="Item Availability">
+                  </v-text-field>
+                  <v-text-field id="ItemRemark" label="Remarks"> </v-text-field>
+                </v-card-text>
+                <v-divider></v-divider>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn rounded dark @click="closeDialog">
+                    <v-icon>mdi-cancel</v-icon>
+                    <span>cancel</span>
+                  </v-btn>
+                  <v-btn rounded dark @click="AddItem">
+                    <v-icon>mdi-plus</v-icon>
+                    <span>save</span>
+                  </v-btn>
+                  <v-spacer></v-spacer>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-col>
+        </v-row>
+        <v-row>
+          <!-- DataTable -->
+          <v-col text-center>
+            <v-data-table
+              :headers="headers"
+              :items="Items"
+              :items-per-page="2"
+              item-key="name"
+              :search="serch"
+              multi-sort
+              :footer-props="{
+                showFirstLastPage: true,
+                prevIcon: 'mdi-minus',
+                nextIcon: 'mdi-plus',
+              }"
+            >
+              <!-- sort-by="name" -->
+              <!-- <template #item.remarks="{ item }">
               <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
             </template> -->
-          </v-data-table>
-        </v-col>
-      </v-row>
-    </v-card>
-    <message />
+            </v-data-table>
+          </v-col>
+        </v-row>
+      </v-card>
+      <message />
+    </v-main>
   </v-app>
 </template>
 

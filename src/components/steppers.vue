@@ -6,70 +6,40 @@
     <!--  ******************* -->
     <v-main>
       <v-card>
+        <v-btn v-show="e6 == 0" @click="e6 = 1" class="success">
+          <v-icon>mdi-autorenew</v-icon>
+          <v-spacer></v-spacer>
+          <span>Enter Details</span>
+        </v-btn>
         <v-stepper v-model="e6" vertical>
           <v-stepper-step :complete="e6 > 1" step="1">
-            Education 
-            <v-stepper-step>
+            <span>Personal Detail</span>
+          </v-stepper-step>
 
           <v-stepper-content step="1">
-            <education/>
-            <v-btn color="primary" @click="e6 = 2">
+            <v-card color="grey lighten-1" class="mb-12">
+              <PersonalInfo />
+            </v-card>
+            <v-btn color="primary" @click="e6 = 3">
               Continue
             </v-btn>
-            <v-btn text >
+            <v-btn text @click="e6 = 0">
               Cancel
             </v-btn>
           </v-stepper-content>
 
           <v-stepper-step :complete="e6 > 2" step="2">
-            Configure analytics for this app
+            <span>Education</span>
           </v-stepper-step>
 
           <v-stepper-content step="2">
-            <v-card
-              color="grey lighten-1"
-              class="mb-12"
-              height="200px"
-            ></v-card>
+            <v-card color="grey lighten-1" class="mb-12">
+              <education />
+            </v-card>
             <v-btn color="primary" @click="e6 = 3">
               Continue
             </v-btn>
-            <v-btn text>
-              Cancel
-            </v-btn>
-          </v-stepper-content>
-
-          <v-stepper-step :complete="e6 > 3" step="3">
-            Select an ad format and name ad unit
-          </v-stepper-step>
-
-          <v-stepper-content step="3">
-            <v-card
-              color="grey lighten-1"
-              class="mb-12"
-              height="200px"
-            ></v-card>
-            <v-btn color="primary" @click="e6 = 4">
-              Continue
-            </v-btn>
-            <v-btn text>
-              Cancel
-            </v-btn>
-          </v-stepper-content>
-
-          <v-stepper-step step="4">
-            View setup instructions
-          </v-stepper-step>
-          <v-stepper-content step="4">
-            <v-card
-              color="grey lighten-1"
-              class="mb-12"
-              height="200px"
-            ></v-card>
-            <v-btn color="primary" @click="e6 = 1">
-              Continue
-            </v-btn>
-            <v-btn text>
+            <v-btn text @click="e6 = 1">
               Cancel
             </v-btn>
           </v-stepper-content>
@@ -83,15 +53,17 @@
   </v-app>
 </template>
 <script lang="ts">
-import Vue from 'vue'
-import Componet from "vue-class-component"
-import education from "./Education.vue"
+import Vue from "vue";
+import Componet from "vue-class-component";
+import education from "./Education.vue";
+import PersonalInfo from "./PersonalInfo.vue";
 @Componet({
-components:{
-education,
-}
+  components: {
+    education,
+    PersonalInfo,
+  },
 })
-export default class Steppers extends Vue{
-  
+export default class Steppers extends Vue {
+  private e6 = 1;
 }
 </script>
