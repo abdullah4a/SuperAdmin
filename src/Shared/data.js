@@ -6,19 +6,21 @@ const getItems = async function() {
             let data = parselist(responce);
             return data;
         } catch (error) {
-            console.error(`There is an Error ${error}`);
-            return [];
+            console.error(`There is an Error ${error.message}`);
+            return null;
         }
     }
     // parsing a Response for User and Cheking Status..
 const parselist = response => {
     if (response.status != 200) throw Error(response.message);
-    if (!response.data) return [];
+    if (!response.data) return null
     let list = response.data;
     if (typeof list != "object") {
-        list = [];
+        console.info("Data is not an object")
+        return list = null;
+    } else {
+        return list;
     }
-    return list;
 };
 const GetMaxID = () => {
     // return getItems.reduce(

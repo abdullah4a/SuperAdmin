@@ -126,7 +126,7 @@ export default class Dashboard extends Vue {
   private dialog = false;
   private chip = false;
   private maxi = false;
-  private Items = [];
+  private Items: any = [];
   private ClassName = "DashBoard";
   private headers = [
     { text: "Item Id", value: "id" },
@@ -204,7 +204,7 @@ export default class Dashboard extends Vue {
           alert("Null Data");
         }
       } else {
-        alert("No Data");
+        console.info("No Data");
       }
     } catch (error) {
       alert("Error getting connection " + error);
