@@ -1,8 +1,8 @@
 import * as axios from "axios"
 import { API } from "./config"
-const getItems = function() {
+const getItems = async function() {
         try {
-            const responce = axios.get(`${API}/Items.json`);
+            const responce = await axios.get(`${API}/Items.json`);
             let data = parselist(responce);
             return data;
         } catch (error) {
@@ -44,7 +44,8 @@ const deleteItem = id => {
 };
 const AddItems = item => {
     //     this.Items.concat(this.NewItem);
-    console.log(`Items are Added ${item}`);
+    const PostResponce=
+        console.log(`Items are Added ${item}`);
 }
 export const Items = {
     getItems,

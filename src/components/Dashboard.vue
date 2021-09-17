@@ -179,21 +179,23 @@ export default class Dashboard extends Vue {
       this.maxi = false;
     }
   }
-
+  deleteItem(item: any) {
+    Items.deleteItem(item);
+  }
   AddItem() {
     //   // Items.AddItems(this.NewItem);
     //   // let id = document.querySelector("input[Itemid]")?.nodeValue;
-    //   let id = document.getElementById("Itemid")!;
-    //   let Name = document.getElementById("ItemName")!;
-    //   let price = document.getElementById("ItemPrice")!;
-    //   let InStock = document.getElementById("ItemInStock")!;
-    //   let Remark = document.getElementById("ItemRemark")!;
-    //   this.NewItem.push(id.value);
-    //   this.NewItem.push(Name.value);
-    //   this.NewItem.push(price.value);
-    //   this.NewItem.push(InStock.value);
-    //   this.NewItem.push(Remark.value);
-    //   console.log(`Added Item where Items=${this.NewItem}`);
+    // let id = document.getElementById("Itemid")!;
+    // let Name = document.getElementById("ItemName")!;
+    // let price = document.getElementById("ItemPrice")!;
+    // let InStock = document.getElementById("ItemInStock")!;
+    // let Remark = document.getElementById("ItemRemark")!;
+    // this.NewItem.push(id.value);
+    // this.NewItem.push(Name.value);
+    // this.NewItem.push(price.value);
+    // this.NewItem.push(InStock.value);
+    // this.NewItem.push(Remark.value);
+    // console.log(`Added Item where Items=${this.NewItem}`);
   }
 
   async LoadItems() {
