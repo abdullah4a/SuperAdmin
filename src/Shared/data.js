@@ -44,8 +44,10 @@ const deleteItem = id => {
 };
 const AddItems = item => {
     //     this.Items.concat(this.NewItem);
-    const PostResponce=
-        console.log(`Items are Added ${item}`);
+    const PostResponce = axios.post(`${API} /Items.json `, item)
+    console.log(`
+                Items are Added $ { item }
+                `);
 }
 export const Items = {
     getItems,
