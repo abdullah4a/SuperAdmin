@@ -1,12 +1,15 @@
 import axios from "axios"
 import { API } from "./config"
 const getItems = function() {
+        let responce;
         try {
-            const responce = axios.get(`${API}/Items.json`);
+            responce = axios.get(API + "/Items.json");
             let data = parselist(responce);
-            console.log(data)
+            console.log(data);
             return data;
         } catch (error) {
+            console.log("status is " + responce.status);
+            console.log("data is " + responce.data);
             console.error(`There is an Error ${error.message}`);
             return null;
         }
