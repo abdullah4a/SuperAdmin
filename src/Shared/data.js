@@ -1,9 +1,10 @@
-import * as axios from "axios"
+import axios from "axios"
 import { API } from "./config"
-const getItems = async function() {
+const getItems = function() {
         try {
-            const responce = await axios.get(`${API}/Items.json`);
+            const responce = axios.get(`${API}/Items.json`);
             let data = parselist(responce);
+            console.log(data)
             return data;
         } catch (error) {
             console.error(`There is an Error ${error.message}`);
