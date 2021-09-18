@@ -1,9 +1,18 @@
 import axios from "axios"
 import { API } from "./config"
 const getItems = function() {
+
+        // return axios
+        //     .get(`${API}/Items.json`)
+        //     .then(function(response) {
+        //         return buildResponse(response).then(results => res.send(results));
+        //     })
+        //     .catch(function(error) {
+        //         handleError(error, res);
+        //     }); 
         let responce;
         try {
-            responce = axios.get(API + "/Items.json");
+            responce = axios.get(`${API}/Items.json`);
             let data = parselist(responce);
             console.log(data);
             return data;
