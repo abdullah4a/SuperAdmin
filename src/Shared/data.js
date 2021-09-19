@@ -1,6 +1,14 @@
 import axios from "axios"
 import { API } from "./config"
-const getItems = function() {
+const getItems = async function() {
+        let data = [];
+        const response = await axios({
+            method: 'get',
+            url: `${API}/Items.json`,
+            responseType: 'json'
+        });
+        data.push(parselist(response));
+        return data;
 
         // return axios
         //     .get(`${API}/Items.json`)
@@ -10,18 +18,18 @@ const getItems = function() {
         //     .catch(function(error) {
         //         handleError(error, res);
         //     }); 
-        let responce;
-        try {
-            responce = axios.get(`${API}/Items.json`);
-            let data = parselist(responce);
-            console.log(data);
-            return data;
-        } catch (error) {
-            console.log("status is " + responce.status);
-            console.log("data is " + responce.data);
-            console.error(`There is an Error ${error.message}`);
-            return null;
-        }
+        // let responce;
+        // try {
+        //     responce = axios.get(`${API}/Items.json`);
+        //     let data = parselist(responce);
+        //     console.log(data);
+        //     return data;
+        // } catch (error) {
+        //     console.log("status is " + responce.status);
+        //     console.log("data is " + responce.data);
+        //     console.error(`There is an Error ${error.message}`);
+        //     return null;
+        // }
     }
     // parsing a Response for User and Cheking Status..
 const parselist = response => {
@@ -29,11 +37,16 @@ const parselist = response => {
     if (!response.data) return null
     let list = response.data;
     if (typeof list != "object") {
-        console.info("Data is not an object")
         return list = null;
     } else {
         return list;
     }
+};
+const ItemsGetFunction = function() {
+    let Items = [];
+    Items.push(getItems());
+    console.log(Items);
+    return Items
 };
 const GetMaxID = () => {
     // return getItems.reduce(
@@ -44,11 +57,11 @@ const GetMaxID = () => {
     // return 1;
 };
 const deleteItem = id => {
-    Object.keys(getItems).forEach(function(key) {
-        if (getItems[key] === id) {
-            delete getItems[key];
-        }
-    });
+    // Object.keys(getItems).forEach(function(key) {
+    //     if (getItems[key] === id) {
+    //         delete getItems[key];
+    //     }
+    // });
     // console.log(item);
     // const index = getItems.indexOf(item);
     // if (index > -1) {
@@ -57,13 +70,10 @@ const deleteItem = id => {
 };
 const AddItems = item => {
     //     this.Items.concat(this.NewItem);
-    const PostResponce = axios.post(`${API} /Items.json `, item)
-    console.log(`
-                Items are Added $ { item }
-                `);
+    console.log(`Items are Added ${item}`);
 }
-export const Items = {
-    getItems,
+export const Item = {
+    ItemsGetFunction,
     GetMaxID,
     deleteItem,
     AddItems

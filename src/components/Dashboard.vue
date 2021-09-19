@@ -99,7 +99,7 @@
               }"
             >
               <!--sort-by="name" -->
-              <template #item.remarks="{ item }">
+              <template #items.remarks="{ item }">
                 <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
               </template>
             </v-data-table>
@@ -116,7 +116,7 @@ import Vue from "vue";
 import message from "./Message.vue";
 import Component from "vue-class-component";
 import pageloader from "./PageLoader.vue";
-import { Items } from "../Shared";
+import { Item } from "../Shared";
 @Component({
   components: {
     message,
@@ -128,7 +128,7 @@ export default class Dashboard extends Vue {
   private dialog = false;
   private chip = false;
   private maxi = false;
-  private Items: any = [];
+  private Items = [];
   private ClassName = "DashBoard";
   private headers = [
     { text: "Item Id", value: "id" },
@@ -180,7 +180,7 @@ export default class Dashboard extends Vue {
     }
   }
   deleteItem(item: any) {
-    Items.deleteItem(item);
+    Item.deleteItem(item);
   }
   AddItem() {
     //   // Items.AddItems(this.NewItem);
@@ -200,10 +200,10 @@ export default class Dashboard extends Vue {
 
   async LoadItems() {
     try {
-      if (Items.getItems()) {
-        if ((await Items.getItems()) !== []) {
+      if (Item.ItemsGetFunction()) {
+        if ((await Item.ItemsGetFunction()) !== []) {
+          this.Items.push(Item.ItemsGetFunction());
           alert("Data fetched");
-          this.Items.push(Items.getItems());
         } else {
           alert("Null Data");
         }
