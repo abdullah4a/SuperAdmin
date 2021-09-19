@@ -128,7 +128,13 @@ export default class Dashboard extends Vue {
   private dialog = false;
   private chip = false;
   private maxi = false;
+<<<<<<< Updated upstream:src/components/Dashboard.vue
   private Items = [];
+=======
+
+  private Items: any = [];
+  
+>>>>>>> Stashed changes:src/components/Dashboard-.vue
   private ClassName = "DashBoard";
   private headers = [
     { text: "Item Id", value: "id" },

@@ -36,6 +36,7 @@ const parselist = response => {
     if (response.status != 200) throw Error(response.message);
     if (!response.data) return null
     let list = response.data;
+    console.log(list);
     if (typeof list != "object") {
         return list = null;
     } else {
