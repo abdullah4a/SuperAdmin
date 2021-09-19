@@ -128,7 +128,7 @@ export default class Dashboard extends Vue {
   private dialog = false;
   private chip = false;
   private maxi = false;
-  private Items = {};
+  private Items = [];
   private ClassName = "DashBoard";
   private headers = [
     { text: "Item Id", value: "id" },
@@ -201,8 +201,8 @@ export default class Dashboard extends Vue {
   LoadItems() {
     try {
       if (Item.ItemsGetFunction()) {
-        if (Item.ItemsGetFunction() !== {}) {
-          this.Items = Item.ItemsGetFunction();
+        if (Item.ItemsGetFunction() !== []) {
+          this.Items.push(tem.ItemsGetFunction());
           alert("Data fetched");
         } else {
           alert("Null Data");
