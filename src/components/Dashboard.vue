@@ -202,7 +202,7 @@ export default class Dashboard extends Vue {
     try {
       if (Item.ItemsGetFunction()) {
         if (Item.ItemsGetFunction() !== []) {
-          this.Items.push(tem.ItemsGetFunction());
+          this.Items.push(Item.ItemsGetFunction());
           alert("Data fetched");
         } else {
           alert("Null Data");
