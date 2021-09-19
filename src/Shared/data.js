@@ -43,9 +43,14 @@ const parselist = response => {
     }
 };
 const ItemsGetFunction = function() {
-    let Items = [];
-    Items.push(getItems());
-    console.log(Items);
+    let Items = {};
+
+    Items = getItems().then(function(result) {
+        return result;
+        // console.log(result)
+    });
+
+    // Items = getItems();
     return Items
 };
 const GetMaxID = () => {
