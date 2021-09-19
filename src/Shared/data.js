@@ -39,6 +39,7 @@ const parselist = response => {
     if (typeof list != "object") {
         return list = null;
     } else {
+        list = JSON.stringify(response.data);
         return list;
     }
 };
@@ -78,7 +79,7 @@ const AddItems = item => {
     console.log(`Items are Added ${item}`);
 }
 export const Item = {
-    ItemsGetFunction,
+    getItems,
     GetMaxID,
     deleteItem,
     AddItems
