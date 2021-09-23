@@ -84,21 +84,20 @@
         <v-row>
           <!-- DataTable -->
           <v-col text-center>
-            <v-data-table
+            <!-- <v-data-table
               v-if="!headers"
               item-key="name"
               class="elevation-1"
               loading
               loading-text="Loading... Please wait"
             >
-            </v-data-table>
+            </v-data-table> -->
             <v-data-table
               :headers="headers"
               :items="Items"
               :items-per-page="2"
               item-key="name"
               :search="serch"
-              v-else
               multi-sort
               :footer-props="{
                 showFirstLastPage: true,
@@ -107,8 +106,8 @@
               }"
             >
               <!--sort-by="name" -->
-              <template #items.remarks="{ item }">
-                <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+              <template #items.remarks="{ items }">
+                <v-icon small @click="deleteItem(items)">mdi-pencil</v-icon>
               </template>
             </v-data-table>
           </v-col>
@@ -144,7 +143,7 @@
 import Vue from "vue";
 import message from "./Message.vue";
 import Component from "vue-class-component";
-import { Item } from "../Shared";
+// import { Item } from "../Shared";
 @Component({
   components: {
     message,
@@ -156,40 +155,38 @@ export default class Dashboard extends Vue {
   private dialog = false;
   private chip = false;
   private maxi = false;
-  private Items: any = [];
   ShowdatePicker = false;
   private ClassName = "DashBoard";
-  private headers = null;
-  // private headers = [
-  //   { text: "Item Id", value: "id" },
-  //   { text: "Item", value: "name" },
-  //   { text: "Price", value: "price" },
-  //   { text: "Availability", value: "InStock" },
-  //   { text: "Remarks", value: "remarks" },
-  // ];
-  // private Items = [
-  //   {
-  //     id: 1000,
-  //     name: "Apples",
-  //     price: "100",
-  //     InStock: "In Stock",
-  //     remarks: "",
-  //   },
-  //   {
-  //     id: 1001,
-  //     name: "Ice cream Feast",
-  //     price: "98.44",
-  //     InStock: "Not In Stock",
-  //     remarks: "",
-  //   },
-  //   {
-  //     id: 1002,
-  //     name: "Candy",
-  //     price: "5",
-  //     InStock: "In Stock",
-  //     remarks: "",
-  //   },
-  // ];
+  private headers = [
+    { text: "Item Id", value: "id" },
+    { text: "Item", value: "name" },
+    { text: "Price", value: "price" },
+    { text: "Availability", value: "InStock" },
+    { text: "Remarks", value: "remarks" },
+  ];
+  private Items = [
+    {
+      id: 1000,
+      name: "Apples",
+      price: "100",
+      InStock: "In Stock",
+      remarks: "",
+    },
+    {
+      id: 1001,
+      name: "Ice cream Feast",
+      price: "98.44",
+      InStock: "Not In Stock",
+      remarks: "",
+    },
+    {
+      id: 1002,
+      name: "Candy",
+      price: "5",
+      InStock: "In Stock",
+      remarks: "",
+    },
+  ];
   private loading = true;
   private NewItem = [];
   closeDialog() {
@@ -210,7 +207,7 @@ export default class Dashboard extends Vue {
     }
   }
   deleteItem(item: any) {
-    Item.deleteItem(item);
+    console.info("Deleted " + this.Items);
   }
   AddItem() {
     //   // Items.AddItems(this.NewItem);
@@ -230,21 +227,21 @@ export default class Dashboard extends Vue {
   datePicker() {
     this.ShowdatePicker = true;
   }
-  LoadItems() {
-    try {
-      if (Item.ItemsGetFunction()) {
-        if (Item.ItemsGetFunction() !== []) {
-          this.Items.push(Item.ItemsGetFunction());
-          alert("Data fetched");
-        } else {
-          alert("Null Data");
-        }
-      } else {
-        console.info("No Data");
-      }
-    } catch (error) {
-      alert("Error getting connection " + error);
-    }
-  }
+  // LoadItems() {
+  //   try {
+  //     if (Item.ItemsGetFunction()) {
+  //       if (Item.ItemsGetFunction() !== []) {
+  //         this.Items.push(Item.ItemsGetFunction());
+  //         alert("Data fetched");
+  //       } else {
+  //         alert("Null Data");
+  //       }
+  //     } else {
+  //       console.info("No Data");
+  //     }
+  //   } catch (error) {
+  //     alert("Error getting connection " + error);
+  //   }
+  // }
 }
 </script>
