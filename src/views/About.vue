@@ -21,7 +21,6 @@ export default Vue.extend({
     };
   },
   methods: {
-    
     // shows() {},
   },
 });

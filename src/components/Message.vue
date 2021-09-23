@@ -16,9 +16,9 @@
         </v-layout>
       </v-card-text>
     </v-card>
-    <v-card class="mx-auto text-center" color="green" dark width="500">
+    <v-card class="mx-auto my-4 text-center" color="green" dark width="500">
       <v-card-text>
-        <v-sheet color="rgba(0, 0, 0, .12)">
+        <v-sheet color="rgba(0, 0, 0, .18)">
           <v-sparkline
             :value="value"
             color="rgba(255, 255, 255, .7)"
