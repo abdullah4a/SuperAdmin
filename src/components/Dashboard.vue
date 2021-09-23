@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <pageloader v-if="loading" />
     <v-main class="ml-7">
       <v-card>
         <v-card-title>
@@ -86,11 +85,20 @@
           <!-- DataTable -->
           <v-col text-center>
             <v-data-table
+              v-if="!headers"
+              item-key="name"
+              class="elevation-1"
+              loading
+              loading-text="Loading... Please wait"
+            >
+            </v-data-table>
+            <v-data-table
               :headers="headers"
               :items="Items"
               :items-per-page="2"
               item-key="name"
               :search="serch"
+              v-else
               multi-sort
               :footer-props="{
                 showFirstLastPage: true,
@@ -108,6 +116,27 @@
       </v-card>
       <message />
     </v-main>
+    <v-footer>
+      <v-row justify="center">
+        <v-date-picker
+          v-if="ShowdatePicker"
+          v-model="date"
+          :allowed-dates="allowedMonths"
+          type="month"
+          class="mt-4"
+          min="2017-01"
+          max="2030-10"
+        >
+        </v-date-picker>
+        <v-col
+          class="primary lighten-2 py-4 text-center white--text"
+          @click="datePicker"
+          cols="12"
+        >
+          {{ new Date().getFullYear() }} — <strong>Dashboard</strong>
+        </v-col>
+      </v-row>
+    </v-footer>
   </v-app>
 </template>
 
@@ -115,28 +144,29 @@
 import Vue from "vue";
 import message from "./Message.vue";
 import Component from "vue-class-component";
-import pageloader from "./PageLoader.vue";
 import { Item } from "../Shared";
 @Component({
   components: {
     message,
-    pageloader,
   },
 })
 export default class Dashboard extends Vue {
   serch = "";
+  date = "2017-12";
   private dialog = false;
   private chip = false;
   private maxi = false;
-  private Items = [];
+  private Items: any = [];
+  ShowdatePicker = false;
   private ClassName = "DashBoard";
-  private headers = [
-    { text: "Item Id", value: "id" },
-    { text: "Item", value: "name" },
-    { text: "Price", value: "price" },
-    { text: "Availability", value: "InStock" },
-    { text: "Remarks", value: "remarks" },
-  ];
+  private headers = null;
+  // private headers = [
+  //   { text: "Item Id", value: "id" },
+  //   { text: "Item", value: "name" },
+  //   { text: "Price", value: "price" },
+  //   { text: "Availability", value: "InStock" },
+  //   { text: "Remarks", value: "remarks" },
+  // ];
   // private Items = [
   //   {
   //     id: 1000,
@@ -168,9 +198,9 @@ export default class Dashboard extends Vue {
   beforeCreate() {
     this.loading = true;
   }
-  async created() {
+  created() {
     this.loading = false;
-    await this.LoadItems();
+    // this.LoadItems();
   }
   maximize() {
     if (!this.maxi) {
@@ -197,7 +227,9 @@ export default class Dashboard extends Vue {
     // this.NewItem.push(Remark.value);
     // console.log(`Added Item where Items=${this.NewItem}`);
   }
-
+  datePicker() {
+    this.ShowdatePicker = true;
+  }
   LoadItems() {
     try {
       if (Item.ItemsGetFunction()) {
