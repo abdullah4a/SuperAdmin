@@ -157,7 +157,7 @@ export default class Dashboard extends Vue {
   private maxi = false;
   ShowdatePicker = false;
   private ClassName = "DashBoard";
-  private headers = [
+  private headers = [  
     { text: "Item Id", value: "id" },
     { text: "Item", value: "name" },
     { text: "Price", value: "price" },
