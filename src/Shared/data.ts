@@ -61,7 +61,7 @@ const GetMaxID = () => {
   //     (acc, item) => (acc = acc > item.id ? acc : item.id),
   //     0
   // );
-  return Math.max(...getItems.map((s: any) => s.id));
+  // return Math.max(...getItems.map((s: any) => s.id));
   // return 1;
 };
 const deleteItem = (id: any) => {
