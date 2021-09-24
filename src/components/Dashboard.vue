@@ -145,7 +145,7 @@
 import Vue from "vue";
 import message from "./Message.vue";
 import Component from "vue-class-component";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 // import { Item } from "../Shared";
 @Component({
   components: {
@@ -173,6 +173,7 @@ export default class Dashboard extends Vue {
   beforeCreate() {
     this.loading = true;
   }
+
   created() {
     this.loading = false;
     // this.LoadItems();
@@ -205,21 +206,24 @@ export default class Dashboard extends Vue {
   datePicker() {
     this.ShowdatePicker = true;
   }
-  // LoadItems() {
-  //   try {
-  //     if (Item.ItemsGetFunction()) {
-  //       if (Item.ItemsGetFunction() !== []) {
-  //         this.Items.push(Item.ItemsGetFunction());
-  //         alert("Data fetched");
-  //       } else {
-  //         alert("Null Data");
-  //       }
-  //     } else {
-  //       console.info("No Data");
-  //     }
-  //   } catch (error) {
-  //     alert("Error getting connection " + error);
-  //   }
-  // }
+  // ...mapActions(["GetItemsAction"]),
+  // this.GetItemsAction();
+  LoadItems() {
+    this.$store.dispatch("GetItemsAction");
+    //   try {
+    //     if (Item.ItemsGetFunction()) {
+    //       if (Item.ItemsGetFunction() !== []) {
+    //         this.Items.push(Item.ItemsGetFunction());
+    //         alert("Data fetched");
+    //       } else {
+    //         alert("Null Data");
+    //       }
+    //     } else {
+    //       console.info("No Data");
+    //     }
+    //   } catch (error) {
+    //     alert("Error getting connection " + error);
+    //   }
+  }
 }
 </script>

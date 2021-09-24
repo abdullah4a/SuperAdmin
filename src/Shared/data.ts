@@ -36,7 +36,7 @@ const parselist = (response: any) => {
   if (response.status != 200) throw Error(response.message);
   if (!response.data) return null;
   let list = response.data;
-  console.log(list);
+  // console.log(list);
   if (typeof list != "object") {
     return (list = null);
   } else {
@@ -45,7 +45,6 @@ const parselist = (response: any) => {
 };
 const ItemsGetFunction = function() {
   const Items = [];
-
   Items.push(
     getItems().then(function(result) {
       return result;
@@ -54,6 +53,7 @@ const ItemsGetFunction = function() {
   );
 
   // Items = getItems();
+  console.error(Items);
   return Items;
 };
 const GetMaxID = () => {
@@ -81,7 +81,7 @@ const AddItems = (item: any) => {
   console.log(`Items are Added ${item}`);
 };
 export const Item = {
-  ItemsGetFunction,
+  getItems,
   GetMaxID,
   deleteItem,
   AddItems,
