@@ -143,10 +143,15 @@
 import Vue from "vue";
 import message from "./Message.vue";
 import Component from "vue-class-component";
+import { mapState } from "vuex";
 // import { Item } from "../Shared";
 @Component({
   components: {
     message,
+  },
+  computed: {
+    ...mapState({ headers: "headers" }),
+    ...mapState({ Items: "Items" }),
   },
 })
 export default class Dashboard extends Vue {
@@ -156,36 +161,36 @@ export default class Dashboard extends Vue {
   private chip = false;
   private maxi = false;
   ShowdatePicker = false;
-  private headers = [
-    { text: "Item Id", value: "id" },
-    { text: "Item", value: "name" },
-    { text: "Price", value: "price" },
-    { text: "Availability", value: "InStock" },
-    { text: "Remarks", value: "remarks" },
-  ];
-  private Items = [
-    {
-      id: 1000,
-      name: "Apples",
-      price: "100",
-      InStock: "In Stock",
-      remarks: "",
-    },
-    {
-      id: 1001,
-      name: "Ice cream Feast",
-      price: "98.44",
-      InStock: "Not In Stock",
-      remarks: "",
-    },
-    {
-      id: 1002,
-      name: "Candy",
-      price: "5",
-      InStock: "In Stock",
-      remarks: "",
-    },
-  ];
+  // private headers = [
+  //   { text: "Item Id", value: "id" },
+  //   { text: "Item", value: "name" },
+  //   { text: "Price", value: "price" },
+  //   { text: "Availability", value: "InStock" },
+  //   { text: "Remarks", value: "remarks" },
+  // ];
+  // private Items = [
+  //   {
+  //     id: 1000,
+  //     name: "Apples",
+  //     price: "100",
+  //     InStock: "In Stock",
+  //     remarks: "",
+  //   },
+  //   {
+  //     id: 1001,
+  //     name: "Ice cream Feast",
+  //     price: "98.44",
+  //     InStock: "Not In Stock",
+  //     remarks: "",
+  //   },
+  //   {
+  //     id: 1002,
+  //     name: "Candy",
+  //     price: "5",
+  //     InStock: "In Stock",
+  //     remarks: "",
+  //   },
+  // ];
   private loading = true;
   private NewItem = [];
   closeDialog() {
@@ -206,7 +211,7 @@ export default class Dashboard extends Vue {
     }
   }
   deleteItem(item: any) {
-    console.info("Deleted " + this.Items);
+    console.info("Deleted " + item);
   }
   AddItem() {
     //   // Items.AddItems(this.NewItem);
