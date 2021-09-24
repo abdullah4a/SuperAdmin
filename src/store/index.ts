@@ -1,4 +1,5 @@
 import { Item } from "@/Shared";
+import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
 import { GET_ITEMS } from "./Mutations";
@@ -12,6 +13,7 @@ const state = {
     { text: "Availability", value: "InStock" },
     { text: "Remarks", value: "remarks" },
   ],
+  Items: [],
   // Items: [
   //   {
   //     id: 1000,
@@ -46,6 +48,11 @@ const actions = {
     const Items = Item.getItems();
     console.error(Items);
     commit(GET_ITEMS, Items);
+  },
+  fetchItems(context) {
+    axios.get(`/api/Items.json`).then((response) => {
+      context.commit(GET_ITEMS, response.data);
+    });
   },
 };
 const getters = {};
