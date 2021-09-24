@@ -2,8 +2,8 @@
   <v-app>
     <v-main class="ml-7">
       <v-card>
-        <v-card-title>
-          {{ ClassName }}
+        <v-card-title class="text-h3">
+          DashBoard
         </v-card-title>
         <v-row>
           <!-- Search Box -->
@@ -105,11 +105,11 @@
                 nextIcon: 'mdi-plus',
               }"
             >
-              <!--sort-by="name" -->
-              <template #items.remarks="{ items }">
-                <v-icon small @click="deleteItem(items)">mdi-pencil</v-icon>
+              <template #items.remarks="{item}">
+                <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
               </template>
             </v-data-table>
+            <!--sort-by="name" -->
           </v-col>
         </v-row>
       </v-card>
@@ -156,8 +156,7 @@ export default class Dashboard extends Vue {
   private chip = false;
   private maxi = false;
   ShowdatePicker = false;
-  private ClassName = "DashBoard";
-  private headers = [  
+  private headers = [
     { text: "Item Id", value: "id" },
     { text: "Item", value: "name" },
     { text: "Price", value: "price" },
