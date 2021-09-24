@@ -1,3 +1,4 @@
+import { Add_Items, Delete_Items, Update_Items } from "./mutations";
 import Vue from "vue";
 import Vuex from "vuex";
 
@@ -35,7 +36,17 @@ const state = {
   ],
 };
 const mutations = {};
-const actions = {};
+const actions = {
+  [Add_Items](state, Item) {
+    state.Item.push(Item);
+  },
+  [Update_Items](statet, item) {
+    
+  },
+  [Delete_Items](state:any, Item:any) {
+    state.Items = [...state.Item.filter(item:any=> item.id !===Items.id)]
+  }
+};
 const getters = {};
 
 export default new Vuex.Store({
