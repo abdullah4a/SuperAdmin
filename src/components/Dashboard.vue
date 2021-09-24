@@ -106,7 +106,9 @@
               }"
             >
               <template #items.remarks="{item}">
-                <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+                <v-icon small @click="deleteItem(item)">
+                  mdi-delete-circle
+                </v-icon>
               </template>
             </v-data-table>
             <!--sort-by="name" -->
@@ -150,8 +152,10 @@ import { mapState } from "vuex";
     message,
   },
   computed: {
+    //Vuex works well in all three ways
+    // Ist one is ...mapState({headers:state=>state.headers}) but this is doesn't suites the TS
     ...mapState({ headers: "headers" }),
-    ...mapState({ Items: "Items" }),
+    ...mapState(["Items"]),
   },
 })
 export default class Dashboard extends Vue {
@@ -161,36 +165,6 @@ export default class Dashboard extends Vue {
   private chip = false;
   private maxi = false;
   ShowdatePicker = false;
-  // private headers = [
-  //   { text: "Item Id", value: "id" },
-  //   { text: "Item", value: "name" },
-  //   { text: "Price", value: "price" },
-  //   { text: "Availability", value: "InStock" },
-  //   { text: "Remarks", value: "remarks" },
-  // ];
-  // private Items = [
-  //   {
-  //     id: 1000,
-  //     name: "Apples",
-  //     price: "100",
-  //     InStock: "In Stock",
-  //     remarks: "",
-  //   },
-  //   {
-  //     id: 1001,
-  //     name: "Ice cream Feast",
-  //     price: "98.44",
-  //     InStock: "Not In Stock",
-  //     remarks: "",
-  //   },
-  //   {
-  //     id: 1002,
-  //     name: "Candy",
-  //     price: "5",
-  //     InStock: "In Stock",
-  //     remarks: "",
-  //   },
-  // ];
   private loading = true;
   private NewItem = [];
   closeDialog() {
