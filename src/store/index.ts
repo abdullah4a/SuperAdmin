@@ -40,12 +40,10 @@ const actions = {
   [Add_Items](state, Item) {
     state.Item.push(Item);
   },
-  [Update_Items](statet, item) {
-    
-  },
-  [Delete_Items](state:any, Item:any) {
+  [Update_Items](statet, item) {},
+  [Delete_Items](state: any, Item: any) {
     // state.Items = [...state.Item.filter(item:any=> item.id !==Items.id)]
-  }
+  },
 };
 const getters = {};
 
