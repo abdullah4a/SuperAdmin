@@ -44,7 +44,7 @@ const actions = {
     
   },
   [Delete_Items](state:any, Item:any) {
-    state.Items = [...state.Item.filter(item:any=> item.id !===Items.id)]
+    // state.Items = [...state.Item.filter(item:any=> item.id !==Items.id)]
   }
 };
 const getters = {};
